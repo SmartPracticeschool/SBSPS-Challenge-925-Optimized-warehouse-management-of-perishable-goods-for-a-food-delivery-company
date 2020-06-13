@@ -10,7 +10,10 @@
     "@trendmicro/react-sidenav": "^0.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+<<<<<<< HEAD
     "react-router-dom": "^5.2.0",
+=======
+>>>>>>> f63c62db11a414cf2818cea210c65fb1861792ac
     "react-scripts": "3.4.1",
     "react-styleguidist": "^11.0.8"
   },

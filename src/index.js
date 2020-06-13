@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+<<<<<<< HEAD
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import trend from './currentTrend'
 import suggestions from './Suggestions'
@@ -23,6 +24,13 @@ const routing= (
 
 ReactDOM.render(
   routing,
+=======
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+>>>>>>> f63c62db11a414cf2818cea210c65fb1861792ac
   document.getElementById('root')
 );
 
