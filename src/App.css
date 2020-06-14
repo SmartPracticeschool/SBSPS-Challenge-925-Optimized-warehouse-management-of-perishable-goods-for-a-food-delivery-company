@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-<<<<<<< HEAD
   color: black;
-=======
->>>>>>> f63c62db11a414cf2818cea210c65fb1861792ac
+  margin-left: 1in;
+  align-self: center;
 }
 
 .App-logo {
@@ -26,6 +25,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
+}
+
+.App-left{
+  margin-left: 1in;
 }
 
 .App-link {

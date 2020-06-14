@@ -8,14 +8,16 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@trendmicro/react-sidenav": "^0.5.0",
+    "es6-promise": "^4.2.8",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
     "react-router-dom": "^5.2.0",
-=======
->>>>>>> f63c62db11a414cf2818cea210c65fb1861792ac
     "react-scripts": "3.4.1",
-    "react-styleguidist": "^11.0.8"
+    "react-styleguidist": "^11.0.8",
+    "shallowequal": "^1.1.0",
+    "tableau-api": "^2.2.3",
+    "tableau-react": "^1.2.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [

@@ -3,11 +3,7 @@
   "name": "Create React App Sample",
   "icons": [
     {
-<<<<<<< HEAD
       "src": "warehouse_icon.png",
-=======
-      "src": "favicon.ico",
->>>>>>> f63c62db11a414cf2818cea210c65fb1861792ac
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
