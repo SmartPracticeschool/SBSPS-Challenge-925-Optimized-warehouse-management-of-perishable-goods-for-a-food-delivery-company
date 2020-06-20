@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 class Suggestions extends React.Component{
     render(){

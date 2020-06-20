@@ -9,6 +9,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+
         <SideNav>
         <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home" >
@@ -18,6 +19,22 @@ class App extends React.Component {
                 </NavIcon>
                 <NavText>
                     Home
+                </NavText>
+            </NavItem>
+            <NavItem eventKey="inventory"onSelect={(selected) => {this.onSelectInventory()}}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-inventory" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                    Inventory List
+                </NavText>
+            </NavItem>
+            <NavItem eventKey="add_meal"onSelect={(selected) => {this.onSelectAdd()}}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-add" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                    Add Meal
                 </NavText>
             </NavItem>
             <NavItem eventKey="current_trend"  onSelect={(selected) => {this.onSelectTrend()}}>
@@ -44,6 +61,14 @@ class App extends React.Component {
                     Suggestions
                 </NavText>
             </NavItem>
+            <NavItem eventKey="donate"onSelect={(selected) => {this.onSelectDonations()}}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-donate" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                    Donations
+                </NavText>
+            </NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>
@@ -61,6 +86,15 @@ class App extends React.Component {
   }
   onSelectSuggestions() {
     this.props.history.push('/suggestions')
+  }
+  onSelectAdd() {
+    this.props.history.push('/add_meal')
+  }
+  onSelectInventory() {
+    this.props.history.push('/inventory')
+  }
+  onSelectDonations() {
+    this.props.history.push('/donations')
   }
 }
 

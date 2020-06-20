@@ -8,6 +8,9 @@ import trend from './currentTrend'
 import suggestions from './Suggestions'
 import avail from './Availability'
 import Homepage from './Homepage'
+import donateHome from './donate/donateHome'
+import addMeal from './add_meal/addMealHome'
+import Inventory from './inventory/inventoryHome'
 
 const routing= (
   <div>
@@ -17,6 +20,10 @@ const routing= (
     <Route exact path="/current_trend" component={trend} />
     <Route exact path="/availability" component={avail}/>
     <Route exact path="/suggestions" component={suggestions}/>
+    <Route exact path="/add_meal" component={addMeal}/>
+    <Route exact path="/inventory" component={Inventory}/>
+    <Route exact path="/donations" component={donateHome}/>
+
   </Router>
   </div>
 )
