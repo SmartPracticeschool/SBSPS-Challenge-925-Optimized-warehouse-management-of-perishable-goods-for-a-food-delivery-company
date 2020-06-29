@@ -11,7 +11,7 @@ class MealPage extends React.Component {
 
     async componentDidMount(){
     //this._ismounted = true;
-    const url = "/result"; 
+    const url = "/input"; 
     const response =await fetch(url);
     const data= await response.json()
     this.setState({ predicted: data.prediction , loading: false });

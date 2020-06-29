@@ -1,0 +1,55 @@
+Metadata-Version: 1.1
+Name: Flask-DB2
+Version: 0.0.10
+Summary: Creates connections for use with DB2
+Home-page: http://github.com/juztin/flask-db2
+Author: Justin Wilson
+Author-email: justin@minty.io
+License: BSD
+Description: Flask-DB2
+        =========
+        
+        `Flask-DB2`_ is an extension to `Flask`_ that uses the ibm_db_dbi
+        driver for database connections.
+        
+        ::
+        
+            from flask import Flask
+            from flask_db2 import DB2
+        
+            app = Flask(__name__)
+            db = DB2(app)
+        
+        
+            @app.route('/')
+            def index()
+                cur = db.connection.cursor()
+                cur.execute(...)
+        
+        
+        get Flask-DB2
+        =============
+        
+        Install `flask`_
+        
+            sudo easy_install Flask-DB2
+        
+        Download the latest release from `Python Package Index`_
+        or clone `the repository`_
+        
+        .. _Flask-DB2:  http://packages.python.org/Flask-DB2
+        .. _Flask: http://flask.pocoo.org/
+        .. _the repository: https://github.com/juztin/flask-db2
+        .. _Python Package Index: https://pypi.python.org/pypi/Flask-DB2
+        
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
