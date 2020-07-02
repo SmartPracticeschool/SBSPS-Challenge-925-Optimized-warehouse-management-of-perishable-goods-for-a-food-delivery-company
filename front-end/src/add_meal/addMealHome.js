@@ -91,6 +91,8 @@ onChange={(e) => this.handleOptionsChange(index, e)} />
     render() {
         let { question, options } = this.state;
         return (
+            <div>
+
             <Container>
                 <Row>
                     <Col sm="10">
@@ -133,6 +135,7 @@ Save</Button> &nbsp;
                     </Col>
                 </Row>
             </Container>
+            </div>
         );
     }
 }

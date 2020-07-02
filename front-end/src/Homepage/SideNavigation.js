@@ -83,28 +83,28 @@ class SideNavigation extends React.Component {
   }
 
   onSelectHome() {
-    this.props.history.push('/main')
+    this.props.history.push('/nav/main')
   } 
   onSelectTrend() {
-    this.props.history.push('/current_trend')
+    this.props.history.push('/nav/current_trend')
   }
   onSelectAvail() {
-    this.props.history.push('/availability')
+    this.props.history.push('/nav/availability')
   }
   onSelectSuggestions() {
-    this.props.history.push('/suggestions')
+    this.props.history.push('/nav/suggestions')
   }
   onSelectAdd() {
-    this.props.history.push('/add_meal')
+    this.props.history.push('/nav/add_meal')
   }
   onSelectStock() {
-    this.props.history.push('/stock')
+    this.props.history.push('/nav/stock')
   }
   onSelectDonations() {
-    this.props.history.push('/donations')
+    this.props.history.push('/nav/donations')
   }
   onSelectMealStock() {
-    this.props.history.push('/meal-wise')
+    this.props.history.push('/nav/form')
   }
 }
 

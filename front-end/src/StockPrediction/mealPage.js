@@ -1,31 +1,22 @@
-import React from "react";
-import { MealWiseInput } from "./mealWiseInput";
-import { Container } from "semantic-ui-react";
+import React, { Component } from 'react';
 
-class MealPage extends React.Component {
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+//import './App.css';
+import MealList from './mealList';
+import MealForm from './mealForm';
 
-    state = {
-        loading:true,
-        predicted:null,
-    }
-
-    async componentDidMount(){
-    //this._ismounted = true;
-    const url = "/input"; 
-    const response =await fetch(url);
-    const data= await response.json()
-    this.setState({ predicted: data.prediction , loading: false });
-    console.log(data.prediction)
-    }
-
-
+class MealPage extends Component {
     render(){
         return (
-            <Container style={{ marginTop: 40 }}>
-                <MealWiseInput/>
-                <div>{this.state.predicted}</div>
-            </Container>
-        );
+
+            <div>
+            
+                <MealForm/>
+                <Router>
+                    <Route exact path="/retrieve" component={MealList} />
+                </Router>
+            </div>
+        )
     }
 }
 

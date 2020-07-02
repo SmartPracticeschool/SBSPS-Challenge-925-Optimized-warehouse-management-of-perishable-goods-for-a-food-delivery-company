@@ -32,6 +32,7 @@ render() {
  
   return( 
     <div className="App">
+
     <h1>Predicted Stock for 10 weeks</h1>
   <ReactTable
     data={data}
