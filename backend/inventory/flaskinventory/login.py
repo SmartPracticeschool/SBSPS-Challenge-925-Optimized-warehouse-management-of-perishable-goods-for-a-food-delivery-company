@@ -22,11 +22,8 @@ def register():
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     #created = datetime.utcnow()
 	
-    cur.execute("INSERT INTO users (name, address, email, password) VALUES ('" + 
-		str(name) + "', '" + 
-		str(address) + "', '" + 
-		str(email) + "', '" + 
-		str(password) + "')")
+    cur.execute("INSERT INTO users (name, address, email, password) VALUES (?,?,?,?)", (str(name),str(address),str(email),str(password),))
+
     db.connection.commit()
 	
     result = {

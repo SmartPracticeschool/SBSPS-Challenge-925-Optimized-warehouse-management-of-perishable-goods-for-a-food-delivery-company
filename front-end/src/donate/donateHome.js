@@ -19,11 +19,12 @@ class DonateHome extends Component {
           <ul className="header">
           <li><NavLink exact to="/">Home</NavLink></li>
 
-<li><NavLink to="/contact">Contact</NavLink></li>
-            
+          <li><NavLink to="/contact">Contact</NavLink></li>
+
             
             
           </ul>
+
           <div className="content">
             <Route exact path="/" component={Home}/>
  

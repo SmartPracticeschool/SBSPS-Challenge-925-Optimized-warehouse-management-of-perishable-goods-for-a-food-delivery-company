@@ -20,12 +20,20 @@ with app.app_context():
   meal_info1 = pd.DataFrame(cur)
   cur.execute("SELECT * FROM raw_materials")
   RawNames = pd.DataFrame(cur)
-
+  cur.execute("select meal_id from meal_info where model='ETS'")
+  ETS=pd.DataFrame(cur)
+  ETS=ETS[0].to_list()
+  cur.execute("select meal_id from meal_info where model='STL'")
+  STL=pd.DataFrame(cur)
+  STL=STL[0].to_list()
+  print("ETS",ETS)
+  print("STL1",STL)
+  
 totalMeals=meal_info1[0].unique()   #changed for db
 #print(totalMeals)
 
-STL=[1885, 1993, 2139, 2631, 1248, 1778, 1062, 2707, 2640, 2306, 2826, 1754, 1902, 1311, 1803, 1525, 2304, 1878, 1216, 1247, 1770, 1198, 1438, 2494, 1847, 2760, 2492, 1543, 2664, 2569, 1571, 2956]
-ETS=[2539, 1207, 1230, 2322, 2290, 1727, 1109, 2126, 1971, 1558, 2581, 1962, 1445, 2444, 2867, 2704, 2577, 2490, 2104]
+#STL=[1885, 1993, 2139, 2631, 1248, 1778, 1062, 2707, 2640, 2306, 2826, 1754, 1902, 1311, 1803, 1525, 2304, 1878, 1216, 1247, 1770, 1198, 1438, 2494, 1847, 2760, 2492, 1543, 2664, 2569, 1571, 2956]
+#ETS=[2539, 1207, 1230, 2322, 2290, 1727, 1109, 2126, 1971, 1558, 2581, 1962, 1445, 2444, 2867, 2704, 2577, 2490, 2104]
 Quantity=Quantity1.set_index(0)  #changed for db
 
 
@@ -169,3 +177,4 @@ def result():
     Ingredients = session.get('ingred', None)
     #print("Sugg",PredRaw)
     return jsonify({"prediction": Pred, "suggestions": PredRaw, "safe":Safe, "reorder":Reorder, "ingredients": Ingredients})
+    

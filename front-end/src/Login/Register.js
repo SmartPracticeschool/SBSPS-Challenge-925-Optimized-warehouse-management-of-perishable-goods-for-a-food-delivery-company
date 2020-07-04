@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
+import axios from 'axios'
 
 class Register extends Component {
   constructor() {
@@ -30,6 +31,11 @@ class Register extends Component {
     }
 
     register(newUser).then(res => {
+      axios
+        .get('/home')
+        .then(response => {
+          console.log(response);
+        })
       this.props.history.push(`/login`)
     })
   }

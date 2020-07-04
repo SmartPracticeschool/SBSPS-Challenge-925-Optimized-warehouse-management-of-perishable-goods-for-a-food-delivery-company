@@ -16,3 +16,6 @@ app.config['JWT_SECRET_KEY'] = 'secret'
 
 import flaskinventory.login
 import flaskinventory.mealpredict
+import flaskinventory.addmeal
+import flaskinventory.stockpredict
+import flaskinventory.stockpredictfetch
