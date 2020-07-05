@@ -44,28 +44,13 @@ class SideNavigation extends React.Component {
                     Add Meal
                 </NavText>
             </NavItem>
-            <NavItem eventKey="current_trend"  onSelect={(selected) => {this.onSelectTrend()}}>
+
+            <NavItem eventKey="inventory" onSelect={(selected) => {this.onSelectInventory()}}>
                 <NavIcon>
-                    <i className="fa fa-fw fa-trend" style={{ fontSize: '1.75em' }} />
+                    <i className="fa fa-fw fa-inventory" style={{ fontSize: '1.75em' }} />
                 </NavIcon>
                 <NavText>
-                    Current Sales Trend
-                </NavText>
-            </NavItem>
-            <NavItem eventKey="availability" onSelect={(selected) => {this.onSelectAvail()}}>
-                <NavIcon>
-                    <i className="fa fa-fw fa-availability" style={{ fontSize: '1.75em' }} />
-                </NavIcon>
-                <NavText>
-                    Raw materials Availability
-                </NavText>
-            </NavItem>
-            <NavItem eventKey="suggestions" onSelect={(selected) => {this.onSelectSuggestions()}}>
-                <NavIcon>
-                    <i className="fa fa-fw fa-suggestions" style={{ fontSize: '1.75em' }} />
-                </NavIcon>
-                <NavText>
-                    Suggestions
+                    Inventory
                 </NavText>
             </NavItem>
             <NavItem eventKey="donate"onSelect={(selected) => {this.onSelectDonations()}}>
@@ -85,14 +70,8 @@ class SideNavigation extends React.Component {
   onSelectHome() {
     this.props.history.push('/nav/main')
   } 
-  onSelectTrend() {
-    this.props.history.push('/nav/current_trend')
-  }
-  onSelectAvail() {
-    this.props.history.push('/nav/availability')
-  }
-  onSelectSuggestions() {
-    this.props.history.push('/nav/suggestions')
+  onSelectInventory() {
+    this.props.history.push('/nav/inventory')
   }
   onSelectAdd() {
     this.props.history.push('/nav/add_meal')

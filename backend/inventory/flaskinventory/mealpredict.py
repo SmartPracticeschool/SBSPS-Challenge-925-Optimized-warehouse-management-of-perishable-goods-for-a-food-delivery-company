@@ -146,7 +146,7 @@ def ValuePredictor(to_predict_list):
     #print(ReorderPoint)
     
 
-  return Prediction,RawMaterials, SafetyStock,ReorderPoint,Ingredients
+  return Prediction,RawMaterials, SafetyStock,ReorderPoint,Ingredients, Pred
 
 
 @app.route('/input', methods=['POST'])
@@ -157,24 +157,63 @@ def input():
     #print(to_predict_list)
     to_predict_list = list(map(int, to_predict_list)) 
     #print(to_predict_list)
-    Predicted,PredRaw, Safety, ReorderPoint, Ingredients = ValuePredictor(to_predict_list)  
+    Predicted,PredRaw, Safety, ReorderPoint, Ingredients, Orders = ValuePredictor(to_predict_list)  
     PredRaw=PredRaw.tolist() 
     session['pred']=Predicted
     session['safe']=Safety
     session['predRaw']=PredRaw 
     session['reorder']=ReorderPoint
     session['ingred']= Ingredients
+    session['orders']=Orders
     print('Done')
     return 'ok! Awesome'
     
 @app.route('/result', methods = ['GET']) 
 def result(): 
-    print("redirected")
-    Pred = session.get('pred', None)
-    Safe = session.get('safe', None)
-    PredRaw = session.get('predRaw', None)
-    Reorder = session.get('reorder', None)
-    Ingredients = session.get('ingred', None)
-    #print("Sugg",PredRaw)
-    return jsonify({"prediction": Pred, "suggestions": PredRaw, "safe":Safe, "reorder":Reorder, "ingredients": Ingredients})
+  print("redirected")
+  Pred = session.get('pred', None)
+  Safe = session.get('safe', None)
+  PredRaw = session.get('predRaw', None)
+  Reorder = session.get('reorder', None)
+  Ingredients = session.get('ingred', None)
+  Orders = session.get('orders', None)
+  #print("Sugg",PredRaw)
+
+  cyclelist=[]
+  for i in range(len(Ingredients)): 
+      res={} 
+      res['label'] = Ingredients[i] 
+      res['y']=PredRaw[i]
+      cyclelist.append(res)
+
+  safetylist=[]
+  for i in range(len(Ingredients)): 
+      res={} 
+      res['label'] = Ingredients[i] 
+      res['y']=Safe[i]
+      safetylist.append(res)
+
+  reorderlist=[]
+  for i in range(len(Ingredients)): 
+      res={} 
+      res['label'] = Ingredients[i] 
+      res['y']=Reorder[i]
+      reorderlist.append(res)
+
+  orderlist=[]
+  for i in range(len(Orders)): 
+      res={} 
+      res['x'] = i+1 
+      res['y']=Orders[i]
+      orderlist.append(res)
+
+  #print("Safety",safety)
+  l=[]
+  l.append(Pred)
+  l.append(Ingredients)
+  l.append(orderlist)
+  l.append(cyclelist)
+  l.append(safetylist)
+  l.append(reorderlist)
+  return {"data":l}
     

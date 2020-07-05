@@ -7,9 +7,9 @@ import Landing from './Login/Landing'
 import Login from './Login/Login'
 import Register from './Login/Register'
 import SideNav from './Homepage/SideNavigation';
-import trend from './visualisation/currentTrend'
-import suggestions from './visualisation/Suggestions'
-import avail from './visualisation/Availability'
+//import trend from './visualisation/currentTrend'
+import inventory from './visualisation/Inventory'
+//import avail from './visualisation/Availability'
 import Homepage from './Homepage/Homepage'
 import donateHome from './donate/donateHome'
 import addMeal from './add_meal/addMeal'
@@ -33,9 +33,7 @@ class App extends React.Component{
                 </div>
                 <Route path="/nav" component={SideNav} />
                 <Route exact path="/nav/main" component={Homepage} />
-                <Route exact path="/nav/current_trend" component={trend} />
-                <Route exact path="/nav/availability" component={avail}/>
-                <Route exact path="/nav/suggestions" component={suggestions}/>
+                <Route exact path="/nav/inventory" component={inventory}/>
                 <Route exact path="/nav/add_meal" component={addMeal}/>
                 <Route exact path="/nav/stock" component={Stock}/>
                 <Route exact path="/nav/donations" component={donateHome}/>

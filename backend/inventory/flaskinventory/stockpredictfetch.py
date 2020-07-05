@@ -7,8 +7,8 @@ from flaskinventory import app
 
 db = DB2(app)
 
-@app.route('/fetchcycle', methods=['GET'])
-def fetchcycle():
+@app.route('/fetch', methods=['GET'])
+def fetchc():
     print("hello")
     cur = db.connection.cursor()
     print('connected')
@@ -30,16 +30,7 @@ def fetchcycle():
         cyclelist.append(res)
 
     print("Cycle",cycle)
-    return {"data": cyclelist}
 
-@app.route('/fetchsafety', methods=['GET'])
-def fetchsafety():
-    print("hello")
-    cur = db.connection.cursor()
-    print('connected')
-    cur.execute("SELECT * FROM raw_materials")
-    RawNames = pd.DataFrame(cur)
-    ingredient = RawNames[0].unique().tolist()
     safety=[]
     for i in range(len(ingredient)):
         cur.execute("select sum("+ingredient[i]+") from safetystock")
@@ -55,4 +46,7 @@ def fetchsafety():
         safetylist.append(res)
 
     print("Safety",safety)
-    return {"data": safetylist}
+    l=[]
+    l.append(safetylist)
+    l.append(cyclelist)
+    return {"data":l}

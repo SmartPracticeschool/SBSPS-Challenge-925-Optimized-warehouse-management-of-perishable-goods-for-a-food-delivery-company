@@ -18,23 +18,12 @@ class StockPredict extends Component {
 
 	componentDidMount() {
         axios
-            .get('/fetchcycle')
+            .get('/fetch')
             .then(response => {
                 console.log(response.data);
-                this.setState({cycle: response.data.data,
+                this.setState({cycle: response.data.data[1],
+                    safety: response.data.data[0]
                 })
-
-                axios
-                    .get('/fetchsafety')
-                    .then(response => {
-                        console.log(response.data);
-                        this.setState({safety: response.data.data,
-                        })
-                        
-                    })
-                    .catch(error => {
-                        this.setState({errorMsg: 'Error retrieving safety data'})
-                    })
                 
             })
             .catch(error => {
