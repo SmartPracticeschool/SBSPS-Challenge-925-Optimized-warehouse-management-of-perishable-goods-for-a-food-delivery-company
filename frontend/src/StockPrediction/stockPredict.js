@@ -12,6 +12,7 @@ class StockPredict extends Component {
 		this.state = {
             cycle: [],
             safety: [],
+            reorder: [],
             errorMsg: ''
 		}
 	}
@@ -22,7 +23,8 @@ class StockPredict extends Component {
             .then(response => {
                 console.log(response.data);
                 this.setState({cycle: response.data.data[1],
-                    safety: response.data.data[0]
+                    safety: response.data.data[0],
+                    reorder:response.data.data[2]
                 })
                 
             })
@@ -88,20 +90,27 @@ class StockPredict extends Component {
                 itemclick: this.toggleDataSeries
             },
             data: [{
+                //Cycle stock
                 type: "column",
                 name: "Cycle stock",
                 showInLegend: true,      
                 yValueFormatString: "#,##0.# Units",
                 dataPoints: this.state.cycle
-            },
-            {
-                type: "column",
-                name: "Safety stock",
-                //axisYType: "secondary",
-                showInLegend: true,
-                yValueFormatString: "#,##0.# Units",
-                dataPoints: this.state.safety
-            }]
+            },{
+				///Reorder Point
+				type: "line",
+				name: "Reorder Point",
+				showInLegend: true,
+				dataPoints: this.state.reorder
+			},{
+				///Safety Stock
+				type: "area",
+				name: "Safety Stock",
+				markerBorderColor: "white",
+				markerBorderThickness: 2,
+				showInLegend: true,
+				dataPoints: this.state.safety
+			}]
         }
         
         return(

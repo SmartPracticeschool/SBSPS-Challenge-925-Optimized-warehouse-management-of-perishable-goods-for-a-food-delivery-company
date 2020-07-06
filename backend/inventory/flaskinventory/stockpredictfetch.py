@@ -46,7 +46,25 @@ def fetchc():
         safetylist.append(res)
 
     print("Safety",safety)
+
+    reorder=[]
+    for i in range(len(ingredient)):
+        cur.execute("select sum("+ingredient[i]+") from reorderpoint")
+        val = pd.DataFrame(cur)
+        val=val[0].unique().tolist()
+        reorder.append(val[0])
+    
+    reorderlist=[]
+    for i in range(len(ingredient)): 
+        res={} 
+        res['label'] = ingredient[i] 
+        res['y']=reorder[i]
+        reorderlist.append(res)
+
+    print("Reorder",reorder)
+
     l=[]
     l.append(safetylist)
     l.append(cyclelist)
+    l.append(reorderlist)
     return {"data":l}

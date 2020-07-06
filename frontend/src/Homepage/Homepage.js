@@ -27,6 +27,9 @@ class Homepage extends React.Component{
 
         return(
             <div className="App-header">
+                <header>
+                    <h2>Welcome to the Optimised Warehouse Management</h2>
+                </header>
                 <div className="container">
                     <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
@@ -50,10 +53,8 @@ class Homepage extends React.Component{
                     </table>
                     </div>
                 </div>
-                <header className="App-left">
-                    <h2>Welcome to the Optimised Warehouse Management</h2>
-                </header>
-                <p className="App-left">You can view the inventory, current trend of sales, raw materials available and suggestions!!</p>
+
+                <p className="App-left">You can add a dish, view the sales & stock predictions or donate food!!</p>
                 <p className="App-left"> Click on the tabs to view :)</p>
             </div>
         )

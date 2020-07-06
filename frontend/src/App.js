@@ -2,8 +2,6 @@ import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 //import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Login/Navbar'
-import Landing from './Login/Landing'
 import Login from './Login/Login'
 import Register from './Login/Register'
 import SideNav from './Homepage/SideNavigation';
@@ -24,8 +22,6 @@ class App extends React.Component{
             <div>
             <Router>
                 <div className="App">
-                    <Navbar />
-                    <Route exact path="/" component={Landing} />
                 <div className="container">
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { login } from './UserFunctions'
+import {Link} from 'react-router-dom'
 
 class Login extends Component {
   constructor() {
@@ -67,6 +68,11 @@ class Login extends Component {
               >
                 Sign in
               </button>
+              <h5><font color="#000000" face="Chelsea Market">
+
+Not a member? <Link to='/register' style={{ color: '#262F5F' }} >Sign up</Link>
+</font>
+                  </h5>
             </form>
           </div>
         </div>

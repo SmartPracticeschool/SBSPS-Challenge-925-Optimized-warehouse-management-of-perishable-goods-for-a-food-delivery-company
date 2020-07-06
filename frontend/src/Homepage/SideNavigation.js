@@ -3,13 +3,14 @@ import SideNav, {NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import './home.css'
 
 class SideNavigation extends React.Component {
   render() {
     return (
       <div>
 
-        <SideNav>
+        <SideNav className='SideNav'>
         <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home" >
             <NavItem eventKey="home"onSelect={(selected) => {this.onSelectHome()}}>
@@ -61,6 +62,14 @@ class SideNavigation extends React.Component {
                     Donations
                 </NavText>
             </NavItem>
+            <NavItem eventKey="logout"onSelect={(selected) => {this.onSelectLogout()}}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                    Logout
+                </NavText>
+            </NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>
@@ -84,6 +93,10 @@ class SideNavigation extends React.Component {
   }
   onSelectMealStock() {
     this.props.history.push('/nav/form')
+  }
+  onSelectLogout() {			
+    localStorage.removeItem('usertoken')
+    this.props.history.push('/login')
   }
 }
 
