@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { login } from './UserFunctions'
 import {Link} from 'react-router-dom'
-
+import './login.css'
+import swal from 'sweetalert'
 class Login extends Component {
   constructor() {
     super()
@@ -30,18 +31,24 @@ class Login extends Component {
       if (!res.error) {
         this.props.history.push(`/nav/main`)
       }
+      else{
+        swal("Invalid username or password")
+      }
     })
   }
 
   render() {
-    return (
+      return (
+
+          <div className="cen1">
       <div className="container">
-        <div className="row">
-          <div className="col-md-6 mt-5 mx-auto">
-            <form noValidate onSubmit={this.onSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                  <div className="form">
+
+          <div className="col-md-10 mt-10 mx-auto">
+                          <form noValidate onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+             <h1 className="h1 mb-3 font-weight-normal"><font face="Chelsea Market">Login</font></h1>
+              <h5><font color="#000000" ><label htmlFor="email">Email address</label></font></h5>
                 <input
                   type="email"
                   className="form-control"
@@ -52,7 +59,7 @@ class Login extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <h5><font color="#000000" ><label htmlFor="password">Password</label></font></h5>
                 <input
                   type="password"
                   className="form-control"
@@ -64,19 +71,22 @@ class Login extends Component {
               </div>
               <button
                 type="submit"
-                className="btn btn-lg btn-primary btn-block"
-              >
-                Sign in
-              </button>
-              <h5><font color="#000000" face="Chelsea Market">
+                className="form button"
+              >Login</button>
+
+                              <div className="cen2">
+         <h5><font color="#000000" face="Chelsea Market">
 
 Not a member? <Link to='/register' style={{ color: '#262F5F' }} >Sign up</Link>
-</font>
-                  </h5>
+            </font>
+                                  </h5>
+              
+              </div>
             </form>
           </div>
         </div>
       </div>
+	  </div>
     )
   }
 }

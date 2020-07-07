@@ -1,11 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap);
 
 body {
-    background-color:#ffffff;
-    padding: 20px;
-    margin-left: 1in;
+  font-family: "Chelsea Market", sans-serif;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ),
+  
+  url('veg1.jpg');
+  background-size: cover;
+  padding: 20px;
+  margin-left: 1in;
   }
-  h1, h2, p, ul, li {
-    font-family: sans-serif;
+  .h1, h2, p, ul, li {
+    font-family: Chelsea Market;
+    color: whitesmoke;
   }
   ul.header li {
     display: inline;
@@ -13,19 +22,31 @@ body {
     margin: 0;
   }
   ul.header {
-    background-color: #111;
+    border-radius: 10px;
+    background-color: #2F2c2c;
+    height: 0.8in;
+    opacity: 0.8;
     padding: 0;
+    margin-left: 90px;
+    margin-right: 220px;
   }
   ul.header li a {
-    color: #FFF;
+     border-radius: 10px;
+    color: #CFE4AB;
     font-weight: bold;
     text-decoration: none;
-    padding: 20px;
+    padding: 25px;
     display: inline-block;
   }
   .content {
-    background-color: #FFF;
+     border-radius: 10px;
+    background-color: #678587;
+    opacity: 0.8;
     padding: 20px;
+    margin-left: 90px;
+    margin-right: 220px;
+    color: whitesmoke;
+    
   }
   .content h2 {
     padding: 0;
@@ -33,8 +54,10 @@ body {
   }
   .content li {
     margin-bottom: 10px;
+    
   }
   .active {
-    background-color: #0099FF;
+     border-radius: 5px;
+    background-color: #7CBD6A;
   }
   

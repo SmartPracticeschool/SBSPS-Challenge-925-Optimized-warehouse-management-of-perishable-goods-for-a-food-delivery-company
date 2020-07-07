@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Meal.css';
+import swal from 'sweetalert'
 
 import CanvasJSReact from './canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -14,11 +15,13 @@ class MealList extends Component {
 		this.addSymbols = this.addSymbols.bind(this);
 		this.state = {
 			predict: "",
+			mealID: "",
 			cycle: [],
 			safety: [],
 			reorder: [],
 			ingred:[],
 			order:[],
+			week:"",
 			errorMsg: ''
 		}
 	}
@@ -42,6 +45,11 @@ class MealList extends Component {
 	}
 
 	componentDidMount() {
+		if (!localStorage["usertoken"]) {
+	
+			swal("Please Login")
+			this.props.history.push(`/login`)
+		} 
 		axios
 			.get('/result')
 			.then(response => {
@@ -52,7 +60,9 @@ class MealList extends Component {
 					order:response.data.data[2],
 					cycle:response.data.data[3],
 					safety:response.data.data[4],
-					reorder:response.data.data[5]
+					reorder:response.data.data[5],
+					mealID:response.data.data[6],
+					week:response.data.data[7]
 				})
                 
 			})
@@ -64,15 +74,17 @@ class MealList extends Component {
 	render() {
 		const options = {
 			animationEnabled: true,
+			backgroundColor: "rgba(255,255,255,0.7)",
 			colorSet: "colorSet2",
 			title: {
-				text: "Meal Stock Prediction"
+				text: "Stock Prediction for dish "+this.state.mealID+" for "+this.state.week+" weeks"
 			},
 			axisX: {
 				title: "Ingredients"
 			},
 			axisY: {
-				title:"Quantity"
+				title:"Quantity",
+				valueFormatString: "###,##,##0.##",
 				//labelFormatter: this.addSymbols
 			},
 			toolTip: {
@@ -88,12 +100,14 @@ class MealList extends Component {
 				type: "column",
 				name: "Raw Materials Required",
 				showInLegend: true,
+				yValueFormatString: "#,##0.# Units",
 				dataPoints: this.state.cycle
 			},{
 				///Reorder Point
 				type: "line",
 				name: "Reorder Point",
 				showInLegend: true,
+				yValueFormatString: "#,##0.# Units",
 				dataPoints: this.state.reorder
 			},{
 				///Safety Stock
@@ -102,35 +116,43 @@ class MealList extends Component {
 				markerBorderColor: "white",
 				markerBorderThickness: 2,
 				showInLegend: true,
+				yValueFormatString: "#,##0.# Units",
 				dataPoints: this.state.safety
 			}]
 		}
 
 		const options1 = {
 			animationEnabled: true,
+			backgroundColor: "rgba(255,255,255,0.7)",
 			title:{
-				text: "Predicted Sales"
+				text: "Predicted Sales of dish "+this.state.mealID
 			},
 			axisX: {
 				title: "Weeks"
 			},
 			axisY: {
 				title: "Number of orders",
-				includeZero: false
+				valueFormatString: "###,##,###.##",
+				includeZero: false,
 			},
 			data: [{
 				type: "spline",
+				lineColor:"black",
+				toolTipContent: "Week {x}: {y}",
+				yValueFormatString: "#,##0.## Units",
 				dataPoints: this.state.order
 			}]
 		}
 		
 		return (
 		<div>
+			<br></br>
 			<div>
 			<CanvasJSChart2 options = {options1} 
 				onRef={ref => this.chart = ref}
 			/>
 			</div>
+			<br></br>
 			<div>
 			<CanvasJSChart options = {options} 
 				onRef={ref => this.chart = ref}

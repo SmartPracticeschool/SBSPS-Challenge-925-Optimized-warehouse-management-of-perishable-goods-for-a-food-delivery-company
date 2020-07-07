@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardTitle, CardBody, Button, Form, FormGroup, Label, Input } 
 from 'reactstrap';
 import axios from 'axios';
+import swal from 'sweetalert'
 import './addmeal.css';
  
 class AddMealHome extends Component {
@@ -16,6 +17,14 @@ class AddMealHome extends Component {
             quant: [this.defaultQuant]
         }
     }
+
+    componentDidMount() {
+        if (!localStorage["usertoken"]) {
+
+            swal("Please Login")
+            this.props.history.push(`/login`)
+        }       
+    } 
  
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
@@ -60,7 +69,7 @@ class AddMealHome extends Component {
             .post('/addmeal', this.state)
             .then(response => {
                 console.log(response.data)
-                alert(response.data)
+                swal(response.data)
 
                 //window.location="/nav/form/retrieve"
 
@@ -130,14 +139,12 @@ class AddMealHome extends Component {
     customRow = (ingred) => {
         const listItems = ingred.map((cusRow, index) =>
             <FormGroup row key={index}>
-                <Label for="ingred" sm={3} className="text-right">Ingredient {index + 1}</Label>
-                <Col sm={7}>
+                <Label for="ingred" sm={7} className="text-left">Ingredient {index + 1}</Label>
+                <Col sm={10}>
                     <Input type="text" name="ingred" id="ingred" value={cusRow.value1} 
 onChange={(e) => this.handleIngredChange(index, e)} />
                 </Col>
-                <Col sm={1}>
-                    <Button color="primary" onClick={(e) => this.handleDelete(index, e)}>X</Button>
-                </Col>
+
  
             </FormGroup>
         );
@@ -150,12 +157,14 @@ onChange={(e) => this.handleIngredChange(index, e)} />
     customRow1 = (quant) => {
         const listItems = quant.map((cusRow, index) =>
             <FormGroup row key={index}>
-                <Label for="quant" sm={3} className="text-right">Quantity {index + 1}</Label>
-                <Col sm={7}>
+                <Label for="quant" sm={7} className="text-left">Quantity</Label>
+                <Col sm={10}>
                     <Input type="text" name="quant" id="quant" value={cusRow.value2} 
 onChange={(e) => this.handleQuantChange(index, e)} />
                 </Col>
-
+                <Col sm={1}>
+                    <Button color="primary" onClick={(e) => this.handleDelete(index, e)}>X</Button>
+                </Col>
  
             </FormGroup>
         );
@@ -169,12 +178,13 @@ onChange={(e) => this.handleQuantChange(index, e)} />
     render() {
         let { meal, ingred, quant } = this.state;
         return (
-            <div>
+            <div className="container">
+            <div className="form">
 
-            <Container>
+            <Container style={{ width: '40rem', justifyContent:'center' }}>
                 <Row>
-                    <Col sm="20">
-                        <Card>
+                    <Col sm="15">
+                        <Card >
                             <CardBody>
                                 <CardTitle className="text-center">
                                         Add Meal
@@ -182,7 +192,7 @@ onChange={(e) => this.handleQuantChange(index, e)} />
                             </CardBody>
                             <CardBody>
                                 <Form>
-                                    <FormGroup row>
+                                    <FormGroup row >
                                         <Label for="meal" sm={3} className="text-right">Meal ID</Label>
                                         <Col sm={7}>
                                             <Input type="text" name="meal" id="meal" 
@@ -196,13 +206,13 @@ value={meal} onChange={this.handleChange} />
                                     </div>
 
                                     <FormGroup row>
-                                        <Col sm={{ size: 20 }}>
+                                        <Col sm={{ size: 15 }}>
                                             <Button color="primary" className="float-right" 
 onClick={this.handleClick} >Add</Button>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="options" sm={3}></Label>
+                                        <Label for="options" sm={4}></Label>
                                         <Col sm={7}>
                                             <Button color="primary" onClick={this.handleSave}>
 Save</Button> &nbsp;
@@ -216,6 +226,7 @@ Save</Button> &nbsp;
                     </Col>
                 </Row>
             </Container>
+            </div>
             </div>
         );
     }

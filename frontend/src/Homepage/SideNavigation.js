@@ -1,16 +1,23 @@
 import React from 'react';
 import SideNav, {NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import './home.css'
+import swal from 'sweetalert'
 
 class SideNavigation extends React.Component {
+    componentDidMount() {
+    if (!localStorage["usertoken"]) {
+
+        swal("Please Login")
+        this.props.history.push(`/login`)
+    }       
+  } 
+
   render() {
     return (
       <div>
 
-        <SideNav className='SideNav'>
+        <SideNav style={{'background-color': '#7cbd6a', 'opacity':0.8,}}>
         <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home" >
             <NavItem eventKey="home"onSelect={(selected) => {this.onSelectHome()}}>
@@ -34,7 +41,7 @@ class SideNavigation extends React.Component {
                     <i className="fa fa-fw fa-blah" style={{ fontSize: '1.75em' }} />
                 </NavIcon>
                 <NavText>
-                    Stock required for a meal
+                    Sales and dish stock
                 </NavText>
             </NavItem>
             <NavItem eventKey="add_meal"onSelect={(selected) => {this.onSelectAdd()}}>
@@ -72,7 +79,9 @@ class SideNavigation extends React.Component {
             </NavItem>
           </SideNav.Nav>
         </SideNav>
+
       </div>
+
     );
   }
 

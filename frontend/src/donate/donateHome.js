@@ -9,8 +9,16 @@ import {
 
 import Home from "./Home";
 import Contact from "./Contact";
+import swal from 'sweetalert'
  
 class DonateHome extends Component {
+  componentDidMount() {
+    if (!localStorage["usertoken"]) {
+
+        swal("Please Login")
+        this.props.history.push(`/login`)
+    }       
+  } 
   render() {
     return (
       <HashRouter>

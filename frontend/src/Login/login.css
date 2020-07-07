@@ -1,0 +1,52 @@
+.form {
+    font-family: "Chelsea Market", sans-serif;
+    position: center;
+    z-index: 1;
+    opacity: 0.8;
+    background: #678587;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 5px auto;
+
+    margin-top: 70px;
+    padding: 45px;
+    text-align: match-parent;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+} 
+
+     /*       .form input {
+                font-family: "Roboto", sans-serif;
+                outline: 0;
+                background: #f2f2f2;
+                border-radius: 40px;
+                width: 100%;
+                border: 0;
+                margin: 0 0 15px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+            }*/
+
+    .form button {
+        font-family: "Chelsea Market", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #7CBD6A;
+        width: 100%;
+        border-radius: 40px;
+        border: 0;
+        opacity: 1;
+        margin-left: auto;
+        margin-top: auto;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+                .form button:hover, .form button:active, .form button:focus {
+                    background: #7B736F;
+                    box-shadow: 0 0 0 2px white, 0 0 0 3px #7CBD6A;
+                }

@@ -1,6 +1,6 @@
 import React from 'react';
 import jwt_decode from 'jwt-decode'
-
+import swal from 'sweetalert'
 
 class Homepage extends React.Component{
     constructor() {
@@ -14,13 +14,21 @@ class Homepage extends React.Component{
       }
     
       componentDidMount() {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
+
+        if (!localStorage["usertoken"]) {
+
+            swal("Please Login")
+            this.props.history.push(`/login`)
+        }
+        else {
+            const token = localStorage.usertoken
+            const decoded = jwt_decode(token)
+            this.setState({
           name: decoded.identity.name,
           address: decoded.identity.address,
           email: decoded.identity.email
         })
+        }
       } 
 
     render(){
@@ -31,7 +39,7 @@ class Homepage extends React.Component{
                     <h2>Welcome to the Optimised Warehouse Management</h2>
                 </header>
                 <div className="container">
-                    <div className="jumbotron mt-5">
+                    <div className="form">
                     <div className="col-sm-8 mx-auto">
                         <h1 className="text-center">PROFILE</h1>
                     </div>

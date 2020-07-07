@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token)
 import ibm_db
 from flaskinventory import app
+import pandas as pd
 
 db = DB2(app)
 bcrypt = Bcrypt(app)
@@ -46,12 +47,18 @@ def login():
 	
     cur.execute("SELECT * FROM users where email = '" + str(email) + "'")
     rv = cur.fetchone()
+    if rv==None:
+        #print("Not found")
+        result = {"error":"Invalid username and password"}  
+        return result
 	
     if bcrypt.check_password_hash(rv[3], password):
         access_token = create_access_token(identity = {'name': rv[0],'address': rv[1],'email': rv[2]})
         result = access_token
+        #print("found")
     else:
-        result = jsonify({"error":"Invalid username and password"})
+        result = {"error":"Invalid username and password"}
+        #print("not found pass")
     
     return result
 	

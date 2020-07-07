@@ -29,7 +29,7 @@ with app.app_context():
   print("ETS",ETS)
   print("STL1",STL)
   
-totalMeals=meal_info1[0].unique()   #changed for db
+totalMeals=meal_info1[0].unique().tolist()   #changed for db
 #print(totalMeals)
 
 #STL=[1885, 1993, 2139, 2631, 1248, 1778, 1062, 2707, 2640, 2306, 2826, 1754, 1902, 1311, 1803, 1525, 2304, 1878, 1216, 1247, 1770, 1198, 1438, 2494, 1847, 2760, 2492, 1543, 2664, 2569, 1571, 2956]
@@ -80,6 +80,8 @@ def ValuePredictor(to_predict_list):
             model = jl.load(FName)
             Pred=[]
             Pred=model.forecast(week) 
+            Pred=Pred.tolist()
+            print("Type", type(Pred))
             RawMat=Quantity.loc[Mid]
             for p in range(0,len(Pred)):
                 qt='Week%s' % p
@@ -146,8 +148,11 @@ def ValuePredictor(to_predict_list):
     #print(ReorderPoint)
     
 
-  return Prediction,RawMaterials, SafetyStock,ReorderPoint,Ingredients, Pred
+  return Prediction,RawMaterials, SafetyStock,ReorderPoint,Ingredients, Pred, Mid, week
 
+@app.route('/dropdown', methods=['GET'])
+def dropdown():
+  return {"meals":totalMeals}
 
 @app.route('/input', methods=['POST'])
 def input():
@@ -155,9 +160,9 @@ def input():
     #print(data)
     to_predict_list = list(data.values()) 
     #print(to_predict_list)
-    to_predict_list = list(map(int, to_predict_list)) 
+    #to_predict_list = list(map(int, to_predict_list)) 
     #print(to_predict_list)
-    Predicted,PredRaw, Safety, ReorderPoint, Ingredients, Orders = ValuePredictor(to_predict_list)  
+    Predicted,PredRaw, Safety, ReorderPoint, Ingredients, Orders, Mid, Week = ValuePredictor(to_predict_list)  
     PredRaw=PredRaw.tolist() 
     session['pred']=Predicted
     session['safe']=Safety
@@ -165,8 +170,10 @@ def input():
     session['reorder']=ReorderPoint
     session['ingred']= Ingredients
     session['orders']=Orders
+    session['mealId']=Mid
+    session['week']=Week
     print('Done')
-    return 'ok! Awesome'
+    return "Awesome ok!"
     
 @app.route('/result', methods = ['GET']) 
 def result(): 
@@ -177,6 +184,8 @@ def result():
   Reorder = session.get('reorder', None)
   Ingredients = session.get('ingred', None)
   Orders = session.get('orders', None)
+  MealID = session.get('mealId', None)
+  Week= session.get('week', None)
   #print("Sugg",PredRaw)
 
   cyclelist=[]
@@ -215,5 +224,7 @@ def result():
   l.append(cyclelist)
   l.append(safetylist)
   l.append(reorderlist)
+  l.append(MealID)
+  l.append(Week)
   return {"data":l}
     

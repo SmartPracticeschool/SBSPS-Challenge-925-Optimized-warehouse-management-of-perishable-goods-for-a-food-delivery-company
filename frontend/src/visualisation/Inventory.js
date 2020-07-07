@@ -1,7 +1,15 @@
 import React from 'react';
 import Tableau from 'tableau-react'
+import swal from 'sweetalert'
 
 class Suggestions extends React.Component{
+    componentDidMount() {
+        if (!localStorage["usertoken"]) {
+
+            swal("Please Login")
+            this.props.history.push(`/login`)
+        }       
+    } 
     render(){
         return(
             <div className="App">

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import CanvasJSReact from './canvasjs.react';
+import LoadingSpinner from './LoadingSpinner';
+import swal from 'sweetalert'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
+
 
 class StockPredict extends Component {
 	constructor(props) {
@@ -13,24 +16,33 @@ class StockPredict extends Component {
             cycle: [],
             safety: [],
             reorder: [],
-            errorMsg: ''
+            errorMsg: '',
+            loading:true
 		}
-	}
+    }
+
 
 	componentDidMount() {
+        if (!localStorage["usertoken"]) {
+
+            swal("Please Login")
+            this.props.history.push(`/login`)
+        } 
         axios
             .get('/fetch')
             .then(response => {
                 console.log(response.data);
                 this.setState({cycle: response.data.data[1],
                     safety: response.data.data[0],
-                    reorder:response.data.data[2]
+                    reorder:response.data.data[2],
+                    loading: false
                 })
                 
             })
             .catch(error => {
                 this.setState({errorMsg: 'Error retrieving cycle data'})
             })
+
 
 
     }
@@ -57,11 +69,9 @@ class StockPredict extends Component {
     render(){
         //const { meal, ingred, quant } = this.state;
         const options = {
-			animationEnabled: true,
-			colorSet: "colorSet1",
-			title:{
-                text: "Predicted stock requirement for 10 weeks"
-            },
+            animationEnabled: true,
+			backgroundColor: "rgba(255,255,255,0.7)",
+            colorSet: "colorSet2",
             subtitles: [{
                 text: "Click Legend to Hide or Unhide Data Series"
             }], 
@@ -70,17 +80,7 @@ class StockPredict extends Component {
             },
             axisY: {
                 title: "Quantity",
-                titleFontColor: "#4F81BC",
-                lineColor: "#4F81BC",
-                labelFontColor: "#4F81BC",
                 tickColor: "#4F81BC"
-            },
-            axisY2: {
-                title: "Clutch - Units",
-                titleFontColor: "#C0504E",
-                lineColor: "#C0504E",
-                labelFontColor: "#C0504E",
-                tickColor: "#C0504E"
             },
             toolTip: {
                 shared: true
@@ -100,7 +100,8 @@ class StockPredict extends Component {
 				///Reorder Point
 				type: "line",
 				name: "Reorder Point",
-				showInLegend: true,
+                showInLegend: true,
+                yValueFormatString: "#,##0.# Units",
 				dataPoints: this.state.reorder
 			},{
 				///Safety Stock
@@ -108,16 +109,18 @@ class StockPredict extends Component {
 				name: "Safety Stock",
 				markerBorderColor: "white",
 				markerBorderThickness: 2,
-				showInLegend: true,
+                showInLegend: true,
+                yValueFormatString: "#,##0.# Units",
 				dataPoints: this.state.safety
 			}]
         }
         
+        const loading=this.state.loading;
+
         return(
-            <div>
-                <CanvasJSChart options = {options} 
-                    onRef={ref => this.chart = ref}
-                />
+            <div >
+                <h1>Predicted stock requirement for 10 weeks</h1>
+                {loading ? <LoadingSpinner/> : <CanvasJSChart  options = {options} onRef={ref => this.chart = ref}/> }
             </div>
         )
     }

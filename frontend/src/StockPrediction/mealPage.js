@@ -4,8 +4,16 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 //import './App.css';
 import MealList from './mealList';
 import MealForm from './mealForm';
+import swal from 'sweetalert'
 
 class MealPage extends Component {
+    componentDidMount() {
+        if (!localStorage["usertoken"]) {
+    
+            swal("Please Login")
+            this.props.history.push(`/login`)
+        }       
+      } 
     render(){
         return (
 

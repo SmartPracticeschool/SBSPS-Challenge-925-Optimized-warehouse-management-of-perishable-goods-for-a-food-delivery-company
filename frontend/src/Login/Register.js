@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import axios from 'axios'
+import * as EmailValidator from 'email-validator';
+import swal from 'sweetalert';
+//import './register.css'
 
 class Register extends Component {
   constructor() {
@@ -10,6 +12,7 @@ class Register extends Component {
       address: '',
       email: '',
       password: '',
+      confirmPassword: '',
       errors: {}
     }
 
@@ -22,32 +25,41 @@ class Register extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-
     const newUser = {
       name: this.state.name,
       address: this.state.address,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,   
+    }
+    const password = this.state.password;
+    const confirmPassword = this.state.confirmPassword;
+    // perform all neccassary validations
+
+    if ((EmailValidator.validate(this.state.email))!== true){
+        swal("Invalid email ID");
+    }
+     else if (password !== confirmPassword) {
+      swal("Passwords don't match");
+    } 
+    else {       
+      register(newUser).then(res => {
+        this.props.history.push(`/login`)
+      })
     }
 
-    register(newUser).then(res => {
-      axios
-        .get('/home')
-        .then(response => {
-          console.log(response);
-        })
-      this.props.history.push(`/login`)
-    })
+
+
   }
 
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-6 mt-5 mx-auto">
-            <form noValidate onSubmit={this.onSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Register</h1>
-              <div className="form-group">
+        <div className="form">
+          <div className="col-md-10 mt-10 mx-auto">
+                    <form noValidate onSubmit={this.onSubmit}>
+                        <div className="form-group">
+              <h1 className="h1 mb-3 font-weight-normal"><font face="Chelsea Market">Register</font></h1>
+              
                 <label htmlFor="name">Restaurant name</label>
                 <input
                   type="text"
@@ -91,9 +103,20 @@ class Register extends Component {
                   onChange={this.onChange}
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword"> Confirm Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  value={this.state.confirmPassword}
+                  onChange={this.onChange}
+                />
+              </div>
               <button
                 type="submit"
-                className="btn btn-lg btn-primary btn-block"
+                className="form button"
               >
                 Register!
               </button>
