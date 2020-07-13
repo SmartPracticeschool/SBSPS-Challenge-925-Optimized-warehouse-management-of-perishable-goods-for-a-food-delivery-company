@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './stockPredict.css'
 
 class MealForm extends Component {
 	constructor(props) {
@@ -61,14 +62,14 @@ class MealForm extends Component {
 		      
 		return (
 			<div>
-				<header >
-					<h1>Find prediction for every meal</h1>
-					<h2>Enter meal ID and number of weeks to view prediction!</h2>
+				<header className="stock-text" >
+					<h1>Find prediction for every dish</h1>
+					<h2>Select a Dish and number of weeks to view prediction!</h2>
 				</header>
 				<form onSubmit={this.submitHandler}>
 					<div>
-						<select type="text" name="mealId" value={mealId} onChange={this.changeHandler}>
-							<option value="">Select Meal ID</option>
+						<select style={{'border-radius':'5px',}} type="text" name="mealId" value={mealId} onChange={this.changeHandler}>
+							<option value="">Select a Dish</option>
 							{optionItems}
 						</select>
 					</div>
@@ -76,7 +77,7 @@ class MealForm extends Component {
 					<br></br>
 					<div>
 						<input
-							style={{'border-radius':'7px',}}
+							style={{'border-radius':'6px', 'width':'125px'}}
                             placeholder="Weeks"
 							type="text"
 							name="week"
@@ -85,7 +86,7 @@ class MealForm extends Component {
 						/>
 					</div>
 					<br></br>
-					<button style={{'border-radius':'7px',}} type="submit">Submit</button>
+					<button style={{'border-radius':'6px',}} type="submit">Submit</button>
 				</form>
 			</div>
 		)

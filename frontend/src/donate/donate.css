@@ -1,19 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap);
 
-body {
-  font-family: "Chelsea Market", sans-serif;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
-  ),
-  
-  url('veg1.jpg');
-  background-size: cover;
-  padding: 20px;
-  margin-left: 1in;
-  }
-  .h1, h2, p, ul, li {
-    font-family: Chelsea Market;
+  .donate-text {
     color: whitesmoke;
   }
   ul.header li {

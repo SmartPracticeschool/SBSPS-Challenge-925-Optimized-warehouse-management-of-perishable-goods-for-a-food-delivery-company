@@ -23,7 +23,7 @@ class DonateHome extends Component {
     return (
       <HashRouter>
         <div>
-          <h1>Donate the excess</h1>
+          <h1 className="donate-text" >Donate the excess</h1>
           <ul className="header">
           <li><NavLink exact to="/">Home</NavLink></li>
 

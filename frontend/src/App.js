@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-//import './App.css';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login/Login'
 import Register from './Login/Register'
 import SideNav from './Homepage/SideNavigation';
 //import trend from './visualisation/currentTrend'
-import inventory from './visualisation/Inventory'
+import inventory from './Inventory/Inventory'
 //import avail from './visualisation/Availability'
 import Homepage from './Homepage/Homepage'
 import donateHome from './donate/donateHome'
@@ -23,6 +23,7 @@ class App extends React.Component{
             <Router>
                 <div className="App">
                 <div className="container">
+                    <Route exact path="/" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                 </div>

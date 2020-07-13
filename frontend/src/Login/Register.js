@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { register } from './UserFunctions'
 import * as EmailValidator from 'email-validator';
 import swal from 'sweetalert';
-//import './register.css'
+import './register.css'
 
 class Register extends Component {
   constructor() {
@@ -54,7 +54,7 @@ class Register extends Component {
   render() {
     return (
       <div className="container">
-        <div className="form">
+        <div className="register-form">
           <div className="col-md-10 mt-10 mx-auto">
                     <form noValidate onSubmit={this.onSubmit}>
                         <div className="form-group">
@@ -65,7 +65,7 @@ class Register extends Component {
                   type="text"
                   className="form-control"
                   name="name"
-                  placeholder="Enter you restaurant's name"
+                  placeholder="Enter your restaurant's name"
                   value={this.state.name}
                   onChange={this.onChange}
                 />
@@ -116,7 +116,7 @@ class Register extends Component {
               </div>
               <button
                 type="submit"
-                className="form button"
+                className="register-form button"
               >
                 Register!
               </button>

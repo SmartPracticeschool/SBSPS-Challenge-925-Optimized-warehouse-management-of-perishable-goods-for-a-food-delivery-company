@@ -1,6 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap);
 
-.login-form button {
+.register-form {
+    font-family: "Chelsea Market", sans-serif;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+    background: #678587;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 10px auto 10px;
+    margin-left: 220px;
+    margin-top: 50px;
+    padding: 45px;
+    text-align: match-parent;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.register-form button {
     font-family: "Chelsea Market", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -19,24 +34,7 @@
     cursor: pointer;
 }
 
-.login-form {
-    font-family: "Chelsea Market", sans-serif;
-    position: relative;
-    z-index: 1;
-    opacity: 0.8;
-    background: #678587;
-    border-radius: 20px;
-    max-width: 450px;
-    margin: 10px auto 10px;
-    margin-left: 270px;
-    margin-top: 75px;
-    padding: 45px;
-    text-align: match-parent;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-} 
-
-.login-form button:hover, .login-form button:active, .login-form button:focus {
+.register-form button:hover, .register-form button:active, .register-form button:focus {
     background: #7B736F;
     box-shadow: 0 0 0 2px #7CBD6A, 0 0 0 3px #7CBD6A;
 }
-

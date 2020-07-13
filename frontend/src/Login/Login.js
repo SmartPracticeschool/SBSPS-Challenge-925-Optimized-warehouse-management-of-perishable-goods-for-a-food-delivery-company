@@ -3,6 +3,8 @@ import { login } from './UserFunctions'
 import {Link} from 'react-router-dom'
 import './login.css'
 import swal from 'sweetalert'
+import logo from './bonnn.png'
+
 class Login extends Component {
   constructor() {
     super()
@@ -41,13 +43,18 @@ class Login extends Component {
       return (
 
           <div className="cen1">
-      <div className="container">
-                  <div className="form">
 
+      <div className="container">
+                  <div className="login-form">
+                  <img src={logo} alt="Logo" style={{width:270, height:150, marginLeft:"50px"}}/>
+              <br></br>
+              <br></br>
           <div className="col-md-10 mt-10 mx-auto">
                           <form noValidate onSubmit={this.onSubmit}>
               <div className="form-group">
+
              <h1 className="h1 mb-3 font-weight-normal"><font face="Chelsea Market">Login</font></h1>
+
               <h5><font color="#000000" ><label htmlFor="email">Email address</label></font></h5>
                 <input
                   type="email"
@@ -71,7 +78,7 @@ class Login extends Component {
               </div>
               <button
                 type="submit"
-                className="form button"
+                className="login-form button"
               >Login</button>
 
                               <div className="cen2">

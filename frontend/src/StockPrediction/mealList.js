@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './Meal.css';
+import './stockPredict.css';
 import swal from 'sweetalert'
 
 import CanvasJSReact from './canvasjs.react';

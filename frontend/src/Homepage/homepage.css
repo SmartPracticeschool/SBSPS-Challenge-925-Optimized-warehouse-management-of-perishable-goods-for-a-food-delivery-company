@@ -1,0 +1,22 @@
+.homepage-text {
+    font-family: Chelsea Market;
+    color: whitesmoke;
+}
+.profile-text {
+    color: black;
+}
+.homepage-form {
+    font-family: "Chelsea Market", sans-serif;
+    color: rgb(14, 13, 13);
+    position: center;
+    opacity: 0.8;
+    background: #678587;
+    border-radius: 20px;
+    width: 800px;
+    margin: 5px auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+    text-align: match-parent;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+} 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import CanvasJSReact from './canvasjs.react';
 import LoadingSpinner from './LoadingSpinner';
+import './stockPredict.css'
 import swal from 'sweetalert'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -119,7 +120,7 @@ class StockPredict extends Component {
 
         return(
             <div >
-                <h1>Predicted stock requirement for 10 weeks</h1>
+                <h1 className="stock-text">Predicted stock requirement for 10 weeks</h1>
                 {loading ? <LoadingSpinner/> : <CanvasJSChart  options = {options} onRef={ref => this.chart = ref}/> }
             </div>
         )

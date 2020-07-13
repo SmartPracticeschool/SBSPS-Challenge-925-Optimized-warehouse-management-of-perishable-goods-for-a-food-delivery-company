@@ -1,40 +1,33 @@
-.App {
-  text-align: center;
-  color: black;
+body {
+  font-family: "Chelsea Market", sans-serif;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ),
+  
+  url('veg1.jpg');
+  background-size: cover;
+  margin-left: 1in !important;
+  margin-top: 25px !important;
+  margin-right: 30px !important;
+  margin-bottom: 30px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@import url(https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap);
+h1, h2, p, ul, li {
+  font-family: Chelsea Market;
+}
+.form {
+  opacity:0.8;
+  border-radius: 20px;
+}
+.form button {
+  background:#7CBD6A; 
+}
+.form button:hover, .form button:active, .form button:focus {
+  background: #7B736F;
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #7CBD6A;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: white;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
 
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

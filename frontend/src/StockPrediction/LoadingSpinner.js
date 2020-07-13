@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { css } from "@emotion/core";
 import FadeLoader from "react-spinners/FadeLoader";
+import './stockPredict.css'
 
 class LoadingSpinner extends Component {
     render(){
@@ -16,7 +17,7 @@ class LoadingSpinner extends Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <p style={{fontSize:20, textAlign:'center'}}>The data is being fetched...please wait!</p>
+                <p className="stock-text" style={{fontSize:20, textAlign:'center'}}>The graph is being generated...please wait!</p>
 
             </div>
         )

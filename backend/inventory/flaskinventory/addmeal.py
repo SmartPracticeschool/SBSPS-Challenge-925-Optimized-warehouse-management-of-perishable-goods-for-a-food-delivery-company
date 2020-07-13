@@ -18,6 +18,7 @@ def addmeal():
     i_name=[]
     i_quant=[]
     meal_id = request.get_json()['meal']
+    meal_name = request.get_json()['meal_name']
     meal_id=int(meal_id)
     ingred = request.get_json()['ingred']
     quant = request.get_json()['quant']
@@ -59,7 +60,6 @@ def addmeal():
     cur.execute("SELECT * FROM quant WHERE meal_id = ?",(meal_id,))
     df2 = pd.DataFrame(cur)
     print(df2)
-
 
 
     #stmt = ibm_db.exec_immediate(conn, "UPDATE quantity SET Potato = 35 WHERE meal_id = 1885")

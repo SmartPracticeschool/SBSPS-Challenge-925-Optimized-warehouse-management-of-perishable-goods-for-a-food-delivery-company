@@ -1,6 +1,7 @@
 import React from 'react';
 import SideNav, {NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
+import './homepage.css'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import swal from 'sweetalert'
 
@@ -17,7 +18,7 @@ class SideNavigation extends React.Component {
     return (
       <div>
 
-        <SideNav style={{'background-color': '#7cbd6a', 'opacity':0.8,}}>
+        <SideNav style={{'background-color': '#7cbd6a', 'opacity':0.8,}} className="homepage-text">
         <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home" >
             <NavItem eventKey="home"onSelect={(selected) => {this.onSelectHome()}}>

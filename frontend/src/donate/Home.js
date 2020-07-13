@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './donate.css'
  
 class Home extends Component {
   render() {

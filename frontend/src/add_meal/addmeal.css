@@ -1,3 +1,30 @@
-.contain2 {
+.contain-addmeal {
     columns: 2 auto;
 }
+
+.addmeal-text{
+    color: rgb(10, 10, 10);
+}
+
+.container-addmeal {
+    color:rgb(10, 10, 10) ;
+    font-size: 120%;
+}
+
+.form-addmeal {
+    opacity: 0.6;
+    border-radius: 25px;
+    width: 800px;
+    margin: 5px auto;
+
+    margin-top: 70px;
+    padding: 45px;
+}
+
+.card-addmeal{
+    margin-top: 1in;
+    align-self: center;
+    background-color:#678587;
+    border-radius: 20px;
+}
+  

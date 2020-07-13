@@ -1,6 +1,7 @@
 import React from 'react';
 import jwt_decode from 'jwt-decode'
 import swal from 'sweetalert'
+import './homepage.css'
 
 class Homepage extends React.Component{
     constructor() {
@@ -34,17 +35,17 @@ class Homepage extends React.Component{
     render(){
 
         return(
-            <div className="App-header">
-                <header>
-                    <h2>Welcome to the Optimised Warehouse Management</h2>
+            <div>
+                <header className="homepage-text">
+                    <h2>Welcome to Bon Appétit - An Optimised Warehouse Management System!</h2>
                 </header>
                 <div className="container">
-                    <div className="form">
+                    <div className="homepage-form">
                     <div className="col-sm-8 mx-auto">
                         <h1 className="text-center">PROFILE</h1>
                     </div>
                     <table className="table col-md-6 mx-auto">
-                        <tbody>
+                        <tbody className="profile-text">
                         <tr>
                             <td>Restaurant Name</td>
                             <td>{this.state.name}</td>
@@ -62,8 +63,8 @@ class Homepage extends React.Component{
                     </div>
                 </div>
 
-                <p className="App-left">You can add a dish, view the sales & stock predictions or donate food!!</p>
-                <p className="App-left"> Click on the tabs to view :)</p>
+                <p className="homepage-text">You can add a dish, view the sales & stock predictions or donate food!!</p>
+                <p className="homepage-text"> Click on the tabs to view :)</p>
             </div>
         )
     }
