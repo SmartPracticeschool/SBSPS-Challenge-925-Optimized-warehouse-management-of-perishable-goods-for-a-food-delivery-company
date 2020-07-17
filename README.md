@@ -7,7 +7,7 @@ Project presentation URL: https://drive.google.com/file/d/1V7g3nBhHCRqXEr9cUsfgs
 
 Project Report URL: https://drive.google.com/file/d/1JGKV-LvqvqI1HUA8lcvrBmuFsifcepDK/view?usp=sharing
 
-Short Video Presentation URL: https://drive.google.com/file/d/1705k0_4YID8SEz9J8rFBS5Je4thYONaO/view?usp=sharing
+Short Video Presentation URL: https://drive.google.com/file/d/1YSvMuZoL66A17HB2n-eqS64rihzOWKVs/view?usp=sharing
 
 Detatiled Video Demonstration URL: https://drive.google.com/file/d/1oU9TI06cN6EPhtFPF-91--HodK-yXomG/view?usp=sharing
 
