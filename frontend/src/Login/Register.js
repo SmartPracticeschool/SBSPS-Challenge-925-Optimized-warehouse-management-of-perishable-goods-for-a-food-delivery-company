@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { register } from './UserFunctions'
 import * as EmailValidator from 'email-validator';
 import swal from 'sweetalert';
-import './register.css'
+import './register.css';
+import emailjs from 'emailjs-com';
 
 class Register extends Component {
   constructor() {
@@ -31,6 +32,13 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,   
     }
+    const msg='A new user just registered.<br></br>Name: '+this.state.name+'<br></br>  Address: '+this.state.address+' <br></br> Email: '+this.state.email;
+    let templateParams = {
+      from_name: 'Bon Appetit',
+      to_name: 'Taniha',
+      subject: 'New User Notification',
+      message_html: msg,
+    }
     const password = this.state.password;
     const confirmPassword = this.state.confirmPassword;
     // perform all neccassary validations
@@ -41,9 +49,15 @@ class Register extends Component {
      else if (password !== confirmPassword) {
       swal("Passwords don't match");
     } 
-    else {       
+    else {  
+      emailjs.send('gmail', 'template_8EdtkAMW', templateParams , 'user_T8MKG7L6zgAWKSTvfZVPt')
+      .then((result) => {
+          console.log(result) //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
+      }, (error) => {
+          console.log(error.text);
+      });    
       register(newUser).then(res => {
-        this.props.history.push(`/login`)
+        this.props.history.push('/register/thanks')
       })
     }
 

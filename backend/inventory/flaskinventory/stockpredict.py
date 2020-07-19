@@ -13,11 +13,10 @@ db = DB2(app)
 @app.route('/home', methods=['GET'])
 def home():
     cur = db.connection.cursor()
-    print('connected')
     cur.execute("SELECT * FROM quant")
-    Quantity1 = pd.DataFrame(cur)
+    Quantity = pd.DataFrame(cur)
     cur.execute("SELECT * FROM meal_info")
-    meal_info1 = pd.DataFrame(cur)
+    mealInfo = pd.DataFrame(cur)
     cur.execute("SELECT * FROM raw_materials")
     RawNames = pd.DataFrame(cur)
     cur.execute("select meal_id from meal_info where model='ETS'")
@@ -29,8 +28,8 @@ def home():
     print("ETS",ETS)
     print("STL",STL)
   
-    totalMeals=meal_info1[0].unique()   #changed for db
-    Quantity=Quantity1.set_index(0)  #changed for db
+    totalMeals=mealInfo[0].unique()  
+    Quantity=Quantity.set_index(0)  
 
     for meal in totalMeals:
         Mid=meal
@@ -56,7 +55,7 @@ def home():
                     for p in range(0,len(Pred)):
                         qt='Week%s' % p
                         qt=[]
-                        for q in range(1,len(RawMat)+1):  #had to change for db
+                        for q in range(1,len(RawMat)+1): 
                             rw=int(round(Pred[p]*RawMat[q]))
                             qt.append(rw)
                         Raw.append(qt)
@@ -72,7 +71,7 @@ def home():
                     for p in range(0,len(Pred)):
                         qt='Week%s' % p
                         qt=[]
-                        for q in range(1,len(RawMat)+1):    #had to change for db
+                        for q in range(1,len(RawMat)+1):    
                             rw=int(round(Pred[p]*RawMat[q]))
                             qt.append(rw)
                         Raw.append(qt)
@@ -135,7 +134,6 @@ def home():
         if df.empty:
             print("Does not exist")
             cur.execute("insert into cyclestock (meal_id) values (?)",(Mid,))
-            print("hello")
         else:
             print('Meal ID already added!')
 
@@ -150,7 +148,6 @@ def home():
                 cur.execute(q2,(RawMaterials[i],Mid,))
         cur.execute("SELECT * FROM cyclestock WHERE meal_id = ?",(Mid,))
         df2 = pd.DataFrame(cur)
-        print(df2)
 
         #Adding safety stock
         #cur.execute("call sysproc.admin_cmd('reorg table QKX97621.SAFETYSTOCK')")
@@ -160,7 +157,6 @@ def home():
         if df.empty:
             print("Does not exist")
             cur.execute("insert into safetystock (meal_id) values (?)",(Mid,))
-            print("hello")
         else:
             print('Meal ID already added!')
 
@@ -175,7 +171,6 @@ def home():
                 cur.execute(q2,(RawMaterials[i],Mid,))
         cur.execute("SELECT * FROM safetystock WHERE meal_id = ?",(Mid,))
         df2 = pd.DataFrame(cur)
-        print(df2)
 
         #Adding reorder point
         #cur.execute("call sysproc.admin_cmd('reorg table QKX97621.REORDERPOINT')")
@@ -185,7 +180,6 @@ def home():
         if df.empty:
             print("Does not exist")
             cur.execute("insert into reorderpoint (meal_id) values (?)",(Mid,))
-            print("hello")
         else:
             print('Meal ID already added!')
 
@@ -200,6 +194,5 @@ def home():
                 cur.execute(q2,(ReorderPoint[i],Mid,))
         cur.execute("SELECT * FROM reorderpoint WHERE meal_id = ?",(Mid,))
         df2 = pd.DataFrame(cur)
-        print(df2)
 
     return 'Stock prediction Done!'   

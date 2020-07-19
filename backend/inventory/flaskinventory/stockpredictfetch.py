@@ -9,9 +9,7 @@ db = DB2(app)
 
 @app.route('/fetch', methods=['GET'])
 def fetchc():
-    print("hello")
     cur = db.connection.cursor()
-    print('connected')
     cur.execute("SELECT * FROM raw_materials")
     RawNames = pd.DataFrame(cur)
     ingredient = RawNames[0].unique().tolist()
@@ -29,7 +27,7 @@ def fetchc():
         res['y']=cycle[i]
         cyclelist.append(res)
 
-    print("Cycle",cycle)
+    print("Cycle stock received")
 
     safety=[]
     for i in range(len(ingredient)):
@@ -45,7 +43,7 @@ def fetchc():
         res['y']=safety[i]
         safetylist.append(res)
 
-    print("Safety",safety)
+    print("Safety stock received")
 
     reorder=[]
     for i in range(len(ingredient)):
@@ -61,7 +59,7 @@ def fetchc():
         res['y']=reorder[i]
         reorderlist.append(res)
 
-    print("Reorder",reorder)
+    print("Reorder point received")
 
     l=[]
     l.append(safetylist)

@@ -6,15 +6,9 @@ from flaskinventory import app
 
 db = DB2(app)
 
-#meal_id=1993
-#i_name=['potato','ketchup','parsley','tomato']
-#i_quant=[10,20,30,14]
-
-
 @app.route('/addmeal', methods=['POST'])
 def addmeal():
     #conn = ibm_db.connect("BLUDB","qkx97621","t3z9qt58pt1f-j9q")
-    print("reached")
     i_name=[]
     i_quant=[]
     meal_id = request.get_json()['meal']
@@ -26,14 +20,11 @@ def addmeal():
         i_name.append(i["value1"])
     for i in quant:
         i_quant.append(int(i["value2"]))
-        #i_name.append(i.value1)
-        #i_quant.append(quant[i].value2)
     print("Meal id",meal_id)
     print("Ingreds", i_name)
     print("Quants",i_quant)
     
     cur = db.connection.cursor()
-    print('connected')
     cur.execute("call sysproc.admin_cmd('reorg table QKX97621.QUANT')")
     cur.execute("SELECT * FROM quant WHERE meal_id = ?",(meal_id,))
     
@@ -44,9 +35,7 @@ def addmeal():
         print("hello")
     else:
         return'Meal ID already added!'
-    #print(df)
-    #df[2] = [str(r) for r in df[2]]
-    #print("count", cur.rowcount)
+
     for i in range(len(i_name)):
         try:
             q="update quant set "+i_name[i]+" = ? where meal_id=?"
@@ -61,8 +50,6 @@ def addmeal():
     df2 = pd.DataFrame(cur)
     print(df2)
 
-
-    #stmt = ibm_db.exec_immediate(conn, "UPDATE quantity SET Potato = 35 WHERE meal_id = 1885")
     print('updated')
     #print ("Number of affected rows: ", ibm_db.num_rows(stmt))
     

@@ -13,7 +13,6 @@ db = DB2(app)
 
 with app.app_context():
   cur = db.connection.cursor()
-  print('connected')
   cur.execute("SELECT * FROM quant")
   Quantity1 = pd.DataFrame(cur)
   cur.execute("SELECT * FROM meal_data")
@@ -26,44 +25,30 @@ with app.app_context():
   cur.execute("select meal_id from meal_data where model='STL'")
   STL=pd.DataFrame(cur)
   STL=STL[0].to_list()
-  print("ETS",ETS)
-  print("STL1",STL)
-  
-totalMeals=meal_info1[0].unique().tolist() 
-Meals=meal_info1[1].unique().tolist()   #changed for db
-#print(totalMeals)
 
-#STL=[1885, 1993, 2139, 2631, 1248, 1778, 1062, 2707, 2640, 2306, 2826, 1754, 1902, 1311, 1803, 1525, 2304, 1878, 1216, 1247, 1770, 1198, 1438, 2494, 1847, 2760, 2492, 1543, 2664, 2569, 1571, 2956]
-#ETS=[2539, 1207, 1230, 2322, 2290, 1727, 1109, 2126, 1971, 1558, 2581, 1962, 1445, 2444, 2867, 2704, 2577, 2490, 2104]
-Quantity=Quantity1.set_index(0)  #changed for db
-print(Quantity)
+totalMeals=meal_info1[0].unique().tolist() 
+Meals=meal_info1[1].unique().tolist() 
+
+Quantity=Quantity1.set_index(0) 
+
 
 def ValuePredictor(to_predict_list): 
   to_predict = np.array(to_predict_list).reshape(1, 2) 
   meal_name=to_predict[0][0]
-  #index=0
-  print("Hi")
   for i in range(len(Meals)):
     if Meals[i]==meal_name:
-      print("Yay")
       break
-  print("xxx")
+
   Mid=int(totalMeals[i])
-  #print(Mid)
-  print("xxx2")
-  print(Mid)
   week=to_predict[0][1]
-  #week=4
   week=int(week)
-  #print(week)
-  print(week)
-  #print(RawNames)
   Ingredients = RawNames[0].unique().tolist()
 
   present=0
   Raw=[]
 
   try:
+    #If STL model is better
     for s in STL:
       if(Mid==s):
         from stldecompose import decompose, forecast
@@ -77,14 +62,13 @@ def ValuePredictor(to_predict_list):
         for p in range(0,len(Pred)):
           qt='Week%s' % p
           qt=[]
-          #for q in range(0,len(RawMat))
-          for q in range(1,len(RawMat)+1):  #had to change for db
+          for q in range(1,len(RawMat)+1): 
             rw=int(round(Pred[p]*RawMat[q]))
             qt.append(rw)
           Raw.append(qt)
-          print("YOOOO")
         break
-
+    
+    #If ETS model is better
     for e in ETS:
         if(Mid==e):
             FName="flaskinventory\models\ETS"+str(Mid)+".xml"
@@ -98,7 +82,7 @@ def ValuePredictor(to_predict_list):
                 qt='Week%s' % p
                 qt=[]
               #for q in range(0,len(RawMat))
-                for q in range(1,len(RawMat)+1):    #had to change for db
+                for q in range(1,len(RawMat)+1): 
                   rw=round(Pred[p]*RawMat[q])
                   qt.append(rw)
                 Raw.append(qt)
@@ -110,6 +94,7 @@ def ValuePredictor(to_predict_list):
       RawMaterials="No raw materials prediction"
 
   else:
+    #Calculation of Cycle, safety stock and reorder point
     sumi=0
 
     for i in range(0,len(Pred)):
@@ -154,9 +139,6 @@ def ValuePredictor(to_predict_list):
         ld=round((leadTime[j]*avgt),2)
         Reorder=round((ld+Safety),2)
         ReorderPoint.append(Reorder)
-    #print("In func sugges",RawMaterials)
-    #print(SafetyStock)
-    #print(ReorderPoint)
     
 
   return Prediction,RawMaterials, SafetyStock,ReorderPoint,Ingredients, Pred, Mid, week
@@ -168,11 +150,7 @@ def dropdown():
 @app.route('/input', methods=['POST'])
 def input():
     data = request.get_json()
-    #print(data)
     to_predict_list = list(data.values()) 
-    #print(to_predict_list)
-    #to_predict_list = list(map(int, to_predict_list)) 
-    #print(to_predict_list)
     Predicted,PredRaw, Safety, ReorderPoint, Ingredients, Orders, Mid, Week = ValuePredictor(to_predict_list)  
     PredRaw=PredRaw.tolist() 
     session['pred']=Predicted
@@ -183,12 +161,10 @@ def input():
     session['orders']=Orders
     session['mealId']=Mid
     session['week']=Week
-    print('Done')
-    return "Awesome ok!"
+    return "OK Done"
     
 @app.route('/result', methods = ['GET']) 
 def result(): 
-  print("redirected")
   Pred = session.get('pred', None)
   Safe = session.get('safe', None)
   PredRaw = session.get('predRaw', None)
@@ -197,7 +173,6 @@ def result():
   Orders = session.get('orders', None)
   MealID = session.get('mealId', None)
   Week= session.get('week', None)
-  #print("Sugg",PredRaw)
 
   cyclelist=[]
   for i in range(len(Ingredients)): 
@@ -227,7 +202,6 @@ def result():
       res['y']=Orders[i]
       orderlist.append(res)
 
-  #print("Safety",safety)
   l=[]
   l.append(Pred)
   l.append(Ingredients)

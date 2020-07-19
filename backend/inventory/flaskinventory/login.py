@@ -21,7 +21,6 @@ def register():
     address = request.get_json()['address']
     email = request.get_json()['email']
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-    #created = datetime.utcnow()
 	
     cur.execute("INSERT INTO users (name, address, email, password) VALUES (?,?,?,?)", (str(name),str(address),str(email),str(password),))
 
@@ -32,7 +31,6 @@ def register():
 		'address' : address,
 		'email' : email,
 		'password' : password
-		#'created' : created
 	}
 
     return jsonify({'result' : result})
@@ -47,18 +45,18 @@ def login():
 	
     cur.execute("SELECT * FROM users where email = '" + str(email) + "'")
     rv = cur.fetchone()
+    if rv[4]==0:
+        result = {"error":"Invalid username and password"}  
+        return result
     if rv==None:
-        #print("Not found")
         result = {"error":"Invalid username and password"}  
         return result
 	
     if bcrypt.check_password_hash(rv[3], password):
         access_token = create_access_token(identity = {'name': rv[0],'address': rv[1],'email': rv[2]})
         result = access_token
-        #print("found")
     else:
         result = {"error":"Invalid username and password"}
-        #print("not found pass")
     
     return result
 	

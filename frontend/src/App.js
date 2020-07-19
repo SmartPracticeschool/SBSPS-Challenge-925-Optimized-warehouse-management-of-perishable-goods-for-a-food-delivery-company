@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login/Login'
 import Register from './Login/Register'
+import Thanks from './Login/Thanks'
 import SideNav from './Homepage/SideNavigation';
 //import trend from './visualisation/currentTrend'
 import inventory from './Inventory/Inventory'
@@ -26,6 +27,7 @@ class App extends React.Component{
                     <Route exact path="/" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/register/thanks" component={Thanks} />
                 </div>
                 </div>
                 <Route path="/nav" component={SideNav} />
